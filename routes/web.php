@@ -28,6 +28,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/components', function () {
         return Inertia::render('ComponentsGallery');
     })->name('components.gallery');
+
+    // Dashboard Group
+    Route::get('/dashboard/reports', function () {
+        return Inertia::render('Dashboard/Reports');
+    })->name('dashboard.reports');
+
+    Route::get('/dashboard/statistics', function () {
+        return Inertia::render('Dashboard/Statistics');
+    })->name('dashboard.statistics');
+
+    Route::get('/dashboard/settings', function () {
+        return Inertia::render('Dashboard/Settings');
+    })->name('dashboard.settings');
+
+    // Finance Group
+    Route::get('/finance/accounts', function () {
+        return Inertia::render('Finance/Accounts');
+    })->name('finance.accounts');
 });
 
 require __DIR__.'/auth.php';
