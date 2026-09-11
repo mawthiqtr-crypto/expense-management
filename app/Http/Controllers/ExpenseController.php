@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Expense;
+use App\Models\Category;
+use App\Http\Requests\StoreExpenseRequest;
+use App\Http\Resources\ExpenseResource;
+use Inertia\Inertia;
+
+class ExpenseController extends Controller
+{
+    public function index()
+    {
+        $expenses = Expense::with('category', 'recorder')
+            ->orderByDesc('date')
+            ->orderByDesc('id')
+            ->get();
+
+        return Inertia::render('Expenses/Index', [
+            'expenses' => ExpenseResource::collection($expenses)
+        ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Expenses/Create', [
+            'categories' => Category::orderBy('name')->get(['id', 'name'])
+        ]);
+    }
+
+    public function store(StoreExpenseRequest $request)
+    {
+        $expense = Expense::create([
+            ...$request->validated(),
+            'recorded_by' => auth()->id(),
+        ]);
+
+        return redirect()->route('expenses.index')
+            ->with('success', 'Expense created successfully.');
+    }
+
+    public function show(Expense $expense)
+    {
+        $expense->load(['category', 'recorder']);
+
+        return Inertia::render('Expenses/Show', [
+            'expense' => new ExpenseResource($expense)
+        ]);
+    }
+}
