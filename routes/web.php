@@ -31,3 +31,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::prefix('api')->middleware('auth')->group(function () {
+    Route::apiResource('expense-categories', \App\Http\Controllers\ExpenseCategoryController::class);
+    Route::apiResource('expense-items', \App\Http\Controllers\ExpenseItemController::class);
+    Route::apiResource('accounts', \App\Http\Controllers\AccountController::class);
+});
