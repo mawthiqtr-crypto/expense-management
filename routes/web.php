@@ -43,6 +43,10 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard.settings');
 
     // Finance Group
+    Route::get('/finance/overview', function () {
+        return Inertia::render('Finance/Overview');
+    })->name('finance.overview');
+
     Route::get('/finance/accounts', function () {
         return Inertia::render('Finance/Accounts');
     })->name('finance.accounts');

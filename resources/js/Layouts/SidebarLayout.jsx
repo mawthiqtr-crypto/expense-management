@@ -60,6 +60,9 @@ export default function SidebarLayout({ header, children }) {
                         </button>
                         
                         <div className={`mt-1 space-y-1 pl-4 ${activeGroup === 'dashboard' ? 'block' : 'hidden'}`}>
+                            <Link href={route('dashboard')} className={`block py-2 px-3 text-sm rounded-md ${route().current('dashboard') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
+                                Home
+                            </Link>
                             <Link href={route('dashboard.reports')} className={`block py-2 px-3 text-sm rounded-md ${route().current('dashboard.reports') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
                                 Reports
                             </Link>
@@ -86,8 +89,8 @@ export default function SidebarLayout({ header, children }) {
                         
                         <div className={`mt-1 space-y-1 pl-4 ${activeGroup === 'finance' ? 'block' : 'hidden'}`}>
                             <Link
-                                href={route('dashboard')}
-                                className={`block py-2 px-3 text-sm rounded-md ${route().current('dashboard') && !route().current('dashboard.*') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
+                                href={route('finance.overview')}
+                                className={`block py-2 px-3 text-sm rounded-md ${route().current('finance.overview') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
                             >
                                 Overview
                             </Link>
