@@ -35,36 +35,59 @@ export default function SidebarLayout({ header, children }) {
                     </Link>
                 </div>
 
-                <nav className="mt-4 px-4 space-y-2">
+                <nav className="mt-4 px-4 space-y-4">
+                    {/* Dashboard Group */}
                     <div>
                         <button 
-                            onClick={() => toggleGroup('main')}
+                            onClick={() => toggleGroup('dashboard')}
                             className="w-full flex items-center justify-between py-2 px-3 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
-                            <span>Main Menu</span>
-                            <svg className={`h-4 w-4 transition-transform ${activeGroup === 'main' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <span>لوحة البيانات</span>
+                            <svg className={`h-4 w-4 transition-transform ${activeGroup === 'dashboard' || activeGroup === '' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
                         
-                        <div className={`mt-1 space-y-1 pl-4 ${activeGroup === 'main' || activeGroup === '' ? 'block' : 'hidden'}`}>
+                        <div className={`mt-1 space-y-1 pl-4 ${activeGroup === 'dashboard' || activeGroup === '' ? 'block' : 'hidden'}`}>
+                            <Link href="#" className="block py-2 px-3 text-sm rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                تقارير
+                            </Link>
+                            <Link href="#" className="block py-2 px-3 text-sm rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                الاحصائيات
+                            </Link>
+                            <Link href="#" className="block py-2 px-3 text-sm rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                اعدادات عامة
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Finance Group */}
+                    <div>
+                        <button 
+                            onClick={() => toggleGroup('finance')}
+                            className="w-full flex items-center justify-between py-2 px-3 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                            <span>المالية</span>
+                            <svg className={`h-4 w-4 transition-transform ${activeGroup === 'finance' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        
+                        <div className={`mt-1 space-y-1 pl-4 ${activeGroup === 'finance' ? 'block' : 'hidden'}`}>
                             <Link
                                 href={route('dashboard')}
                                 className={`block py-2 px-3 text-sm rounded-md ${route().current('dashboard') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
                             >
-                                Dashboard
+                                الرئيسية
                             </Link>
                             <Link
                                 href={route('expenses.index')}
                                 className={`block py-2 px-3 text-sm rounded-md ${route().current('expenses.*') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
                             >
-                                Expenses
+                                المصروفات
                             </Link>
-                            <Link
-                                href={route('components.gallery')}
-                                className={`block py-2 px-3 text-sm rounded-md ${route().current('components.gallery') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
-                            >
-                                UI Components
+                            <Link href="#" className="block py-2 px-3 text-sm rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                الحسابات
                             </Link>
                         </div>
                     </div>
