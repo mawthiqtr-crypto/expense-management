@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
+import ToastMessage from '@/Components/ToastMessage';
 
 export default function SidebarLayout({ header, children }) {
-    const user = usePage().props.auth.user;
+    const { user } = usePage().props.auth;
+    const { flash, errors } = usePage().props;
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activeGroup, setActiveGroup] = useState('');
 
@@ -14,6 +16,8 @@ export default function SidebarLayout({ header, children }) {
 
     return (
         <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
+            <ToastMessage flash={flash} errors={errors} />
+
             {/* Mobile sidebar backdrop */}
             {sidebarOpen && (
                 <div 
