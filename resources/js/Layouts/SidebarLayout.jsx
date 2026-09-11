@@ -18,7 +18,7 @@ export default function SidebarLayout({ header, children }) {
         const currentRoute = route().current();
         if (['dashboard', 'dashboard.reports', 'dashboard.statistics', 'dashboard.settings'].includes(currentRoute)) {
             setActiveGroup('dashboard');
-        } else if (['expenses.*', 'finance.accounts'].includes(currentRoute) || currentRoute?.startsWith('expenses.')) {
+        } else if (['finance.overview', 'finance.accounts'].includes(currentRoute) || currentRoute?.startsWith('expenses.')) {
             setActiveGroup('finance');
         } else {
             setActiveGroup('');
