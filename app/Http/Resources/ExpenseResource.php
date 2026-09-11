@@ -19,6 +19,7 @@ class ExpenseResource extends JsonResource
             'amount' => $this->amount,
             'description' => $this->description,
             'date' => $this->date ? $this->date->format('Y-m-d') : null,
+            'related_party' => $this->related_party,
             'category_id' => $this->category_id,
             'category' => $this->whenLoaded('category', function () {
                 return [

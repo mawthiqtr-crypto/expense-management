@@ -11,7 +11,8 @@ class Expense extends Model
         'description',
         'date',
         'category_id',
-        'recorded_by'
+        'recorded_by',
+        'related_party'
     ];
 
     protected function casts(): array

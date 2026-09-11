@@ -11,6 +11,7 @@ export default function Create({ categories }) {
         description: '',
         date: new Date().toISOString().split('T')[0],
         category_id: '',
+        related_party: '',
     });
 
     const submit = (e) => {
@@ -83,6 +84,20 @@ export default function Create({ categories }) {
                             ))}
                         </select>
                         <InputError message={errors.category_id} className="mt-2" />
+                    </div>
+
+                    <div>
+                        <InputLabel htmlFor="related_party" value="الجهة / الشخص المرتبط (اختياري)" />
+                        <TextInput
+                            id="related_party"
+                            type="text"
+                            name="related_party"
+                            value={data.related_party}
+                            className="mt-1 block w-full"
+                            onChange={(e) => setData('related_party', e.target.value)}
+                            placeholder="مثال: محمد محمود، حساب بنك القاهرة..."
+                        />
+                        <InputError message={errors.related_party} className="mt-2" />
                     </div>
 
                     <div className="flex items-center justify-end gap-4">

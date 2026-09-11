@@ -60,6 +60,12 @@ export default function SidebarLayout({ header, children }) {
                             >
                                 Expenses
                             </Link>
+                            <Link
+                                href={route('components.gallery')}
+                                className={`block py-2 px-3 text-sm rounded-md ${route().current('components.gallery') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
+                            >
+                                UI Components
+                            </Link>
                         </div>
                     </div>
                 </nav>
