@@ -5,13 +5,13 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
-export default function Create({ categories }) {
+export default function Create({ categories, relatedParties }) {
     const { data, setData, post, processing, errors } = useForm({
         amount: '',
         description: '',
         date: new Date().toISOString().split('T')[0],
         category_id: '',
-        related_party: '',
+        related_party_id: '',
     });
 
     const submit = (e) => {
@@ -87,17 +87,20 @@ export default function Create({ categories }) {
                     </div>
 
                     <div>
-                        <InputLabel htmlFor="related_party" value="الجهة / الشخص المرتبط (اختياري)" />
-                        <TextInput
-                            id="related_party"
-                            type="text"
-                            name="related_party"
-                            value={data.related_party}
-                            className="mt-1 block w-full"
-                            onChange={(e) => setData('related_party', e.target.value)}
-                            placeholder="مثال: محمد محمود، حساب بنك القاهرة..."
-                        />
-                        <InputError message={errors.related_party} className="mt-2" />
+                        <InputLabel htmlFor="related_party_id" value="الجهة / الشخص المرتبط (اختياري)" />
+                        <select
+                            id="related_party_id"
+                            name="related_party_id"
+                            value={data.related_party_id}
+                            onChange={(e) => setData('related_party_id', e.target.value)}
+                            className="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                        >
+                            <option value="">اختر الشخص / الجهة (اختياري)</option>
+                            {relatedParties.map((party) => (
+                                <option key={party.id} value={party.id}>{party.name}</option>
+                            ))}
+                        </select>
+                        <InputError message={errors.related_party_id} className="mt-2" />
                     </div>
 
                     <div className="flex items-center justify-end gap-4">

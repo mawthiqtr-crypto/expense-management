@@ -16,7 +16,7 @@ return new class extends Migration
             $table->decimal('amount', 15, 2);
             $table->string('description');
             $table->date('date');
-            $table->string('related_party')->nullable();
+            $table->foreignId('related_party_id')->nullable()->constrained('related_parties')->nullOnDelete();
             $table->foreignId('category_id')->constrained()->restrictOnDelete();
             $table->foreignId('recorded_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();

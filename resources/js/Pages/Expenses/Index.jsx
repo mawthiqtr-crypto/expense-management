@@ -41,7 +41,7 @@ export default function Index({ expenses }) {
                                 <tr key={expense.id}>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{expense.date}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{expense.description}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{expense.related_party || '-'}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{expense.related_party?.name || '-'}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{expense.category?.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">${expense.amount}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

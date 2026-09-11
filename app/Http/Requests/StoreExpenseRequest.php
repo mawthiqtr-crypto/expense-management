@@ -27,7 +27,7 @@ class StoreExpenseRequest extends FormRequest
             'description' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date'],
             'category_id' => ['required', 'exists:categories,id'],
-            'related_party' => ['nullable', 'string', 'max:255'],
+            'related_party_id' => ['nullable', 'exists:related_parties,id'],
         ];
     }
 }

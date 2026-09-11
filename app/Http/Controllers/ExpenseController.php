@@ -12,7 +12,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::with('category', 'recorder')
+        $expenses = Expense::with('category', 'recorder', 'relatedParty')
             ->orderByDesc('date')
             ->orderByDesc('id')
             ->get();
@@ -25,7 +25,8 @@ class ExpenseController extends Controller
     public function create()
     {
         return Inertia::render('Expenses/Create', [
-            'categories' => Category::orderBy('name')->get(['id', 'name'])
+            'categories' => Category::orderBy('name')->get(['id', 'name']),
+            'relatedParties' => \App\Models\RelatedParty::all(),
         ]);
     }
 
@@ -42,7 +43,7 @@ class ExpenseController extends Controller
 
     public function show(Expense $expense)
     {
-        $expense->load(['category', 'recorder']);
+        $expense->load(['category', 'recorder', 'relatedParty']);
 
         return Inertia::render('Expenses/Show', [
             'expense' => new ExpenseResource($expense)

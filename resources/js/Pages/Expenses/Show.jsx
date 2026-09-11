@@ -34,7 +34,7 @@ export default function Show({ expense }) {
 
                     <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Related Party</dt>
-                        <dd className="mt-1 text-sm text-gray-900 dark:text-gray-100">{data.related_party || 'N/A'}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 dark:text-gray-100">{data.related_party?.name || 'N/A'}</dd>
                     </div>
 
                     <div className="sm:col-span-1">

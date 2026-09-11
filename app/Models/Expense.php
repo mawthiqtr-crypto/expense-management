@@ -12,7 +12,7 @@ class Expense extends Model
         'date',
         'category_id',
         'recorded_by',
-        'related_party'
+        'related_party_id'
     ];
 
     protected function casts(): array
@@ -26,6 +26,11 @@ class Expense extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function relatedParty()
+    {
+        return $this->belongsTo(RelatedParty::class);
     }
 
     public function recorder()
