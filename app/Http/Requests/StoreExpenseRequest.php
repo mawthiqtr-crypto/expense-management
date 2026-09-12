@@ -27,6 +27,7 @@ class StoreExpenseRequest extends FormRequest
             'description' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date'],
             'category_id' => ['required', 'exists:categories,id'],
+            'recorded_by' => ['required', 'exists:users,id'],
             'related_party_id' => ['nullable', 'exists:related_parties,id'],
         ];
     }
