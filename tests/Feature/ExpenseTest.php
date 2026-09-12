@@ -22,7 +22,7 @@ class ExpenseTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/expenses');
-        
+
         $response->assertStatus(200);
     }
 
@@ -36,13 +36,14 @@ class ExpenseTest extends TestCase
             'description' => 'Test Expense',
             'date' => '2026-09-11',
             'category_id' => $category->id,
+            'recorded_by' => $user->id,
         ];
 
         $response = $this->actingAs($user)->post('/expenses', $expenseData);
 
         $response->assertRedirect('/expenses');
         $response->assertSessionHasNoErrors();
-        
+
         $this->assertDatabaseHas('expenses', [
             'amount' => 100.50,
             'description' => 'Test Expense',
@@ -56,10 +57,11 @@ class ExpenseTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/expenses', [
-            'amount' => -10, // Invalid
-            'description' => '', // Invalid
+            'amount' => -10,
+            'description' => '',
+            'recorded_by' => '',
         ]);
 
-        $response->assertSessionHasErrors(['amount', 'description', 'date', 'category_id']);
+        $response->assertSessionHasErrors(['amount', 'description', 'date', 'category_id', 'recorded_by']);
     }
 }

@@ -2,111 +2,232 @@ import SidebarLayout from '@/Layouts/SidebarLayout';
 import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
-import DangerButton from '@/Components/DangerButton';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import Checkbox from '@/Components/Checkbox';
-import Dropdown from '@/Components/Dropdown';
-import Modal from '@/Components/Modal';
-import { useState } from 'react';
+import { FaDownload, FaEdit, FaPlus, FaTrashAlt } from 'react-icons/fa';
+
+const quickActions = {
+    add: { label: 'إضافة', icon: FaPlus, title: 'إضافة مصروف جديد' },
+    edit: { label: 'تعديل', icon: FaEdit, title: 'تعديل المصروف' },
+    delete: { label: 'حذف', icon: FaTrashAlt, title: 'حذف المصروف' },
+    export: { label: 'تصدير', icon: FaDownload, title: 'تصدير البيانات' },
+};
 
 export default function ComponentsGallery() {
-    const [modalOpen, setModalOpen] = useState(false);
-
     return (
         <SidebarLayout header="UI Components Gallery">
             <Head title="Components Gallery" />
 
             <div className="space-y-8">
-                {/* Buttons */}
-                <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b pb-2">Buttons</h3>
-                    <div className="flex flex-wrap gap-4">
-                        <PrimaryButton>Primary Button</PrimaryButton>
-                        <SecondaryButton>Secondary Button</SecondaryButton>
-                        <DangerButton>Danger Button</DangerButton>
-                        <PrimaryButton disabled>Disabled Primary</PrimaryButton>
+                <section className="rounded-xl border border-[#e5e7eb] bg-[#f7f7f7] p-6 shadow-sm">
+                    <div className="mb-6 flex items-center justify-between gap-3 text-sm text-gray-600">
+                        <div className="flex items-center gap-2">
+                            <span>إدارة المصروفات</span>
+                            <span>›</span>
+                            <span className="text-gray-400">إضافة مصروف</span>
+                        </div>
+                        <div className="text-gray-500">العودة إلى القائمة</div>
+                    </div>
+
+                    <div className="mb-6 text-center">
+                        <h2 className="text-3xl font-bold text-[#1f2937]">إضافة مصروف جديد</h2>
+                        <p className="mt-2 text-sm text-[#4b5563]">
+                            يرجى التحقق من تفاصيل المصروف قبل حفظه.
+                        </p>
+                    </div>
+
+                    <div className="rounded-xl border border-[#e5e7eb] bg-white p-6 shadow-sm">
+                        <div className="mb-6 grid gap-6 md:grid-cols-2">
+                            <div>
+                                <InputLabel htmlFor="date" value="التاريخ *" className="mb-2" />
+                                <TextInput
+                                    id="date"
+                                    type="text"
+                                    value="11/18/2025"
+                                    className="mt-1 block w-full rounded-lg border-[#d1d5db] bg-white px-3 py-3 text-gray-700 focus:border-[#0f5b4c] focus:ring-[#0f5b4c]"
+                                />
+                                <p className="mt-2 text-xs text-gray-500">تاريخ المعاملة.</p>
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="amount" value="المبلغ *" className="mb-2" />
+                                <TextInput
+                                    id="amount"
+                                    type="text"
+                                    value="750.00"
+                                    className="mt-1 block w-full rounded-lg border-[#d1d5db] bg-white px-3 py-3 text-gray-700 focus:border-[#0f5b4c] focus:ring-[#0f5b4c]"
+                                />
+                                <p className="mt-2 text-xs text-gray-500">القيمة المدفوعه.</p>
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="category" value="الفئة *" className="mb-2" />
+                                <select
+                                    id="category"
+                                    className="mt-1 block w-full rounded-lg border border-[#d1d5db] bg-white px-3 py-3 text-gray-700 shadow-sm focus:border-[#0f5b4c] focus:ring-[#0f5b4c]"
+                                    defaultValue=""
+                                >
+                                    <option value="">اختر الفئة</option>
+                                    <option>أدوات مكتبية</option>
+                                    <option>مشتريات</option>
+                                </select>
+                                <p className="mt-2 text-xs text-gray-500">تحديد الفئة المناسبة.</p>
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="spent_by" value="المصروف من قبل *" className="mb-2" />
+                                <select
+                                    id="spent_by"
+                                    className="mt-1 block w-full rounded-lg border border-[#d1d5db] bg-white px-3 py-3 text-gray-700 shadow-sm focus:border-[#0f5b4c] focus:ring-[#0f5b4c]"
+                                    defaultValue=""
+                                >
+                                    <option value="">اختر الموظف</option>
+                                    <option>مهندسة سارة</option>
+                                    <option>محمد علي</option>
+                                </select>
+                                <p className="mt-2 text-xs text-gray-500">اختر الموظف الذي قام بالشراء.</p>
+                            </div>
+
+                            <div className="md:col-span-2">
+                                <InputLabel htmlFor="description" value="الوصف *" className="mb-2" />
+                                <textarea
+                                    id="description"
+                                    rows="4"
+                                    className="mt-1 block w-full rounded-lg border border-[#d1d5db] bg-white px-3 py-3 text-gray-700 shadow-sm focus:border-[#0f5b4c] focus:ring-[#0f5b4c]"
+                                    defaultValue="شراء مستلزمات مكتبية وأدوات مختبرية متعددة."
+                                />
+                                <p className="mt-2 text-xs text-gray-500">وصف مختصر ومفيد عن المصروف.</p>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                            <div className="flex items-center gap-3 text-sm text-[#b91c1c]">
+                                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#fee2e2] text-[#b91c1c]">!</span>
+                                <span>يرجى مراجعة الحقول الفارغة قبل الحفظ.</span>
+                            </div>
+
+                            <div className="flex items-center justify-end gap-3">
+                                <SecondaryButton>إلغاء</SecondaryButton>
+                                <PrimaryButton>حفظ المصروف</PrimaryButton>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                {/* Form Inputs */}
-                <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b pb-2">Form Inputs</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <InputLabel htmlFor="sample_text" value="Standard Text Input" />
-                            <TextInput id="sample_text" className="mt-1 block w-full" placeholder="Type something..." />
+                <section className="rounded-xl border border-[#e5e7eb] bg-white p-6 shadow-sm">
+                    <div className="mb-5 flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <span>Component:</span>
+                            <span className="rounded-md border border-[#d1d5db] bg-[#f3f4f6] px-2 py-1 text-xs">DropdownSelect</span>
                         </div>
-                        
+                        <h3 className="text-2xl font-bold text-[#1f2937]">Quick Actions</h3>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-4">
+                        {Object.values(quickActions).map(({ label, icon: Icon, title }) => (
+                            <button
+                                key={label}
+                                type="button"
+                                title={title}
+                                className="group flex flex-col items-center justify-center gap-3 rounded-xl border border-[#d1d5db] bg-[#f9fafb] p-4 text-center text-sm font-medium text-gray-700 transition hover:border-[#0f5b4c] hover:bg-white hover:text-[#0f5b4c]"
+                            >
+                                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#b7d8ce] bg-[#ecfdf5] text-[#0f5b4c] shadow-sm transition group-hover:scale-105">
+                                    <Icon className="h-5 w-5" />
+                                </span>
+                                <span>{label}</span>
+                            </button>
+                        ))}
+                    </div>
+                </section>
+
+                <section className="rounded-xl border border-[#e5e7eb] bg-white p-6 shadow-sm">
+                    <div className="mb-5 flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <span>Component:</span>
+                            <span className="rounded-md border border-[#d1d5db] bg-[#f3f4f6] px-2 py-1 text-xs">Buttons & Actions</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-[#1f2937]">الأزرار</h3>
+                    </div>
+
+                    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+                        <div className="rounded-xl border border-[#e5e7eb] bg-[#f9fafb] p-4">
+                            <div className="mb-3 text-xs text-gray-500">Default</div>
+                            <PrimaryButton className="w-full">حفظ المصروف</PrimaryButton>
+                        </div>
+                        <div className="rounded-xl border border-[#e5e7eb] bg-[#f9fafb] p-4">
+                            <div className="mb-3 text-xs text-gray-500">Secondary</div>
+                            <SecondaryButton className="w-full">إلغاء</SecondaryButton>
+                        </div>
+                        <div className="rounded-xl border border-[#e5e7eb] bg-[#f9fafb] p-4">
+                            <div className="mb-3 text-xs text-gray-500">Disabled</div>
+                            <PrimaryButton disabled className="w-full">حفظ المصروف</PrimaryButton>
+                        </div>
+                        <div className="rounded-xl border border-[#e5e7eb] bg-[#f9fafb] p-4">
+                            <div className="mb-3 text-xs text-gray-500">Loading</div>
+                            <PrimaryButton className="w-full" disabled>
+                                <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                                جاري الحفظ
+                            </PrimaryButton>
+                        </div>
+                        <div className="rounded-xl border border-[#e5e7eb] bg-[#f9fafb] p-4">
+                            <div className="mb-3 text-xs text-gray-500">Neutral</div>
+                            <SecondaryButton className="w-full">إغلاق</SecondaryButton>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="rounded-xl border border-[#e5e7eb] bg-white p-6 shadow-sm">
+                    <div className="mb-5 flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <span>Component:</span>
+                            <span className="rounded-md border border-[#d1d5db] bg-[#f3f4f6] px-2 py-1 text-xs">Form Inputs</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-[#1f2937]">النماذج</h3>
+                    </div>
+
+                    <div className="grid gap-6 md:grid-cols-2">
                         <div>
-                            <InputLabel htmlFor="sample_error" value="Input with Error" />
-                            <TextInput id="sample_error" className="mt-1 block w-full border-red-500" value="Invalid data" />
-                            <InputError message="This field is required and has an error." className="mt-2" />
+                            <InputLabel htmlFor="valid" value="الحقل السليم" className="mb-2" />
+                            <TextInput
+                                id="valid"
+                                value="750.00"
+                                className="mt-1 block w-full rounded-lg border-[#d1d5db] bg-white px-3 py-3 text-gray-700 focus:border-[#0f5b4c] focus:ring-[#0f5b4c]"
+                            />
                         </div>
 
                         <div>
-                            <InputLabel htmlFor="sample_select" value="Select Dropdown" />
-                            <select id="sample_select" className="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                            <InputLabel htmlFor="error" value="الحقل الخاطئ" className="mb-2" />
+                            <TextInput
+                                id="error"
+                                value=""
+                                className="mt-1 block w-full rounded-lg border-[#ef4444] bg-[#fff5f5] px-3 py-3 text-red-700 placeholder:text-red-300 focus:border-[#ef4444] focus:ring-[#ef4444]"
+                                placeholder="يرجى إدخال المبلغ"
+                            />
+                            <InputError message="هذا الحقل مطلوب." className="mt-2" />
+                        </div>
+
+                        <div>
+                            <InputLabel htmlFor="checkbox" value="اختيار" className="mb-2" />
+                            <div className="mt-2 flex items-center gap-3 rounded-lg border border-[#d1d5db] bg-[#f9fafb] p-3">
+                                <Checkbox id="checkbox" name="checkbox" defaultChecked />
+                                <span className="text-sm text-gray-700">تفعيل العنصر</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <InputLabel htmlFor="select" value="القائمة المنسدلة" className="mb-2" />
+                            <select
+                                id="select"
+                                className="mt-1 block w-full rounded-lg border border-[#d1d5db] bg-white px-3 py-3 text-gray-700 shadow-sm focus:border-[#0f5b4c] focus:ring-[#0f5b4c]"
+                                defaultValue=""
+                            >
+                                <option value="">اختر الخيار</option>
+                                <option>أدوات مكتبية</option>
+                                <option>مشتريات</option>
                             </select>
                         </div>
-
-                        <div className="flex items-center mt-6">
-                            <Checkbox id="sample_checkbox" name="remember" />
-                            <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Checkbox Example</span>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Cards / Data Display */}
-                <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b pb-2">Cards & Stats</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border border-gray-100 dark:border-gray-600">
-                            <div className="text-sm text-gray-500 dark:text-gray-400">Total Revenue</div>
-                            <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">$45,231.89</div>
-                        </div>
-                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border border-gray-100 dark:border-gray-600">
-                            <div className="text-sm text-gray-500 dark:text-gray-400">Active Users</div>
-                            <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">1,204</div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Modals & Dropdowns */}
-                <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b pb-2">Overlays</h3>
-                    <div className="flex gap-4">
-                        <PrimaryButton onClick={() => setModalOpen(true)}>Open Modal</PrimaryButton>
-                        
-                        <Modal show={modalOpen} onClose={() => setModalOpen(false)}>
-                            <div className="p-6">
-                                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                    Sample Modal Title
-                                </h2>
-                                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                    This is a sample modal dialog demonstrating how overlays work in the application shell.
-                                </p>
-                                <div className="mt-6 flex justify-end">
-                                    <SecondaryButton onClick={() => setModalOpen(false)}>Close</SecondaryButton>
-                                    <PrimaryButton className="ms-3" onClick={() => setModalOpen(false)}>Confirm Action</PrimaryButton>
-                                </div>
-                            </div>
-                        </Modal>
-
-                        <Dropdown>
-                            <Dropdown.Trigger>
-                                <SecondaryButton>Click for Dropdown</SecondaryButton>
-                            </Dropdown.Trigger>
-                            <Dropdown.Content>
-                                <Dropdown.Link href="#">Action 1</Dropdown.Link>
-                                <Dropdown.Link href="#">Action 2</Dropdown.Link>
-                                <Dropdown.Link href="#" as="button">Action 3 (Button)</Dropdown.Link>
-                            </Dropdown.Content>
-                        </Dropdown>
                     </div>
                 </section>
             </div>
